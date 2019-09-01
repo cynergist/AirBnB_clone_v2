@@ -16,8 +16,9 @@ def do_pack():
     # Checks commands can run locally; creates tgz file containing
     # web_static html files
     check_local = local("tar -cvzf versions/web_static_{}.tgz web_static".
-                        format(created_time.strftime("%Y%m%dT%H%M%S")))
+                        format(created_time.strftime("%Y%m%d%H%M%S")))
     if check_local.failed:
         return None
     else:
-        return check_local
+        return ("versions/web_static_{}.tgz".
+                format(created_time.strftime("%Y%m%d%H%M%S")))
