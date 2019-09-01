@@ -37,7 +37,7 @@ def do_deploy(archive_path):
     del_arch = run("rm /tmp/{}".format(sl[1]))
     if del_arch.failed:
         return False
-    u_arch3 = run("mv/data/web_static/releases/{}/web_static/* /data/web_static/releases/{}".format(sd[0], sd[0]))
+    u_arch3 = run("mv /data/web_static/releases/{}/web_static/* /data/web_static/releases/{}/".format(sd[0], sd[0]))
     if u_arch3.failed:
         return False
     u_arch4 = run("rm -rf /data/web_static/releases/{}/web_static".
