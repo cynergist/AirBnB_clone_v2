@@ -14,18 +14,5 @@ def deploy():
     # Call do_pack() function and store the path of the created archive
     path_archive = do_pack()
     if path_archive is None:
-        print("path_archive is none")
         return False
-    print("This is path archive {}".format(path_archive))
     return do_deploy(path_archive)
-
-# Call the do_deploy(archive_path) function,
-# using the new path of the new archive
-
-
-# def do_deploy(path_archive):
-    #Return the return value of do_deploy
-#    if do_deploy.failed:
-#        return None
-#    else:
-#        return True
