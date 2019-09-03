@@ -4,8 +4,9 @@
 from flask import Flask
 app = Flask(__name__)
 # Use the decorator @app.route'/'
-@app.route('/', strict_slashes=False)
 
+
+@app.route('/', strict_slashes=False)
 def hello():
     return "Hello HBNB!"
 
