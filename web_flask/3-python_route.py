@@ -22,7 +22,7 @@ def c_is(text):
 
 @app.route('/python/<text>', strict_slashes=False)
 def python_is(text='is cool'):
-    return 'Python {}'.format(escape(text.replace('_', ' ')))
+    return 'Python %s' % escape(text.replace('_', ' '))
 
 if __name__ == '__main__':
     app.debug = True
