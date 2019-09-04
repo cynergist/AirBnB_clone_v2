@@ -48,7 +48,8 @@ class DBStorage:
         else:
                 for classes in cls_list:
                     for cls_object in results:
-                        key = '{}.{}'.format(type(cls_object).__name__, cls_object.id)
+                        key = '{}.{}'.format(type(cls_object).
+                                             __name__, cls_object.id)
                         cls_result[key] = cls_object
 
         return cls_result
