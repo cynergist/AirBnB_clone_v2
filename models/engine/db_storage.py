@@ -40,12 +40,18 @@ class DBStorage:
         """
         cls_result = {}
         cls_list = [State, City, User, Place, Review, Amenity]
-        results = self.__session.query(cls).all()
+        results = self.__session.query(eval(cls)).all()
         if cls:
             for cls_object in results:
-                key = '{}.{}'.format(type(row).__name__, row.id)
+                key = '{}.{}'.format(type(cls_object).__name__, cls_object.id)
                 cls_result[key] = cls_object
-                return cls_result
+        else:
+                for classes in cls_list:
+                    for cls_object in results:
+                        key = '{}.{}'.format(type(cls_object).__name__, cls_object.id)
+                        cls_result[key] = cls_object
+
+        return cls_result
 
     def new(self, obj):
         """
@@ -80,4 +86,4 @@ class DBStorage:
         """
         removes private session
         """
-        self.__session.remove()
+        self.__session.close()
