@@ -40,7 +40,8 @@ class FileStorage:
         """
         if not cls:
             return self.__objects
-        return {k: v for k, v in self.__objects.items() if type(v) == cls}
+        else:
+            return {k: v for k, v in self.__objects.items() if k.startswith(cls.__name__)}
 
     def new(self, obj):
         """Formats the objects to be set in self.__objects
