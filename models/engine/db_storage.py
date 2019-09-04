@@ -29,11 +29,10 @@ class DBStorage:
                                       format(getenv('HBNB_MYSQL_USER'),
                                              getenv('HBNB_MYSQL_PWD'),
                                              getenv('HBNB_MYSQL_HOST'),
-                                             getenv('HBNB_MYSQL_DB'),
-                                             getenv('HBNB_TYPE_STORAGE'),
+                                             getenv('HBNB_MYSQL_DB')),
                                       pool_pre_ping=True)
         if getenv('HBNB_ENV') == 'test':
-                                      Base.metadata.drop_all(bind=self.__engine)
+            Base.metadata.drop_all(bind=self.__engine)
 
     def all(self, cls=None):
         """
