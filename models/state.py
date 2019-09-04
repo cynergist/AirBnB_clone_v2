@@ -5,7 +5,7 @@ from sqlalchemy.orm import relationship, backref
 from sqlalchemy import Column, String
 from models.city import City
 from os import getenv
-
+import models
 
 class State(BaseModel, Base):
     """This is the class for State
@@ -22,5 +22,5 @@ class State(BaseModel, Base):
         @property
         def cities(self):
             """Getter attribute in case of file storage"""
-            return [city for city in models.storage.all(City)
+            return [city for city in models.storage.all(City).values()
                     if city.state_id == self.id]
