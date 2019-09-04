@@ -29,30 +29,24 @@ class DBStorage:
                                       format(getenv('HBNB_MYSQL_USER'),
                                              getenv('HBNB_MYSQL_PWD'),
                                              getenv('HBNB_MYSQL_HOST'),
-                                             getenv('HBNB_MYSQL_DB')),
+                                             getenv('HBNB_MYSQL_DB'),
+                                             getenv('HBNB_TYPE_STORAGE'),
                                       pool_pre_ping=True)
         if getenv('HBNB_ENV') == 'test':
-            Base.metadata.drop_all(bind=self.__engine)
+                                      Base.metadata.drop_all(bind=self.__engine)
 
     def all(self, cls=None):
         """
         query all objects from the current db session, based on class name
         """
-        if cls is None:
-            results = self.__session.query(City).all()
-            results += self.__session.query(State).all()
-            results += self.__session.query(User).all()
-            results += self.__session.query(Place).all()
-            results += self.__session.query(Amenity).all()
-            results += self.__session.query(Review).all()
-        else:
-            results = self.__session.query(cls).all()
-
-        result_dict = {}
-        for row in results:
-            key = '{}.{}'.format(type(row).__name__, row.id)
-            result_dict[key] = row
-        return result_dict
+        cls_result = {}
+        cls_list = [State, City, User, Place, Review, Amenity]
+        results = self.__session.query(cls).all()
+        if cls:
+            for cls_object in results:
+                key = '{}.{}'.format(type(row).__name__, row.id)
+                cls_result[key] = cls_object
+                return cls_result
 
     def new(self, obj):
         """
@@ -82,3 +76,9 @@ class DBStorage:
                                       expire_on_commit=False)
         Session = scoped_session(self.__session)
         self.__session = Session()
+
+    def close(self):
+        """
+        removes private session
+        """
+        self.__session.remove()
