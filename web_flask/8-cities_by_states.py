@@ -19,7 +19,6 @@ def cities_by_states():
     return render_template('8-cities_by_states.html', cities=cities)
 
 
-
 @app.teardown_appcontext
 def close_session(self):
     ''' app.teardown tells the host computer to close the session '''
